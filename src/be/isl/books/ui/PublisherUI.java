@@ -24,7 +24,7 @@ public class PublisherUI {
                 System.out.println("3. Search Publishers");
                 System.out.println("4. Update Publisher");
                 System.out.println("5. Delete Publisher");
-                System.out.println("6. Exit");
+                System.out.println("6. Exit And Close Connection");
                 System.out.print("Enter your choice: ");
 
                 int choice = scanner.nextInt();

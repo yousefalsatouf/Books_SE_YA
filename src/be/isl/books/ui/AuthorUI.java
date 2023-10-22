@@ -23,7 +23,7 @@ public class AuthorUI {
             System.out.println("3. Search Authors");
             System.out.println("4. Update Author");
             System.out.println("5. Delete Author");
-            System.out.println("6. Exit");
+            System.out.println("6. Exit And Close Connection");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
