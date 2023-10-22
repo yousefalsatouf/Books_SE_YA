@@ -4,6 +4,10 @@ import be.isl.books.business.AuthorManager;
 import be.isl.books.entity.Author;
 import be.isl.books.ui.viewmodel.AuthorViewModel;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -84,12 +88,20 @@ public class AuthorUI {
         String dateOfBirth = scanner.nextLine();
 
         Author newAuthor = new Author();
+        newAuthor.setDateOfBirth(java.sql.Date.valueOf(dateOfBirth));
         newAuthor.setFirstname(firstName);
         newAuthor.setLastname(lastName);
         newAuthor.setEmail(email);
-        newAuthor.setDateOfBirth(java.sql.Date.valueOf(dateOfBirth));
+
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        newAuthor.setInsertedIs(sqlDate);
+        newAuthor.setUpdatedTs(sqlDate);
+
 
         return newAuthor;
+
     }
 
     private static int captureAuthorId(Scanner scanner) {

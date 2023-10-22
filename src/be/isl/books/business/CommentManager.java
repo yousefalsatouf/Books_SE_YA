@@ -83,7 +83,7 @@ public class CommentManager {
     public void addComment(Comment comment) {
         PreparedStatement preparedStatement = null;
         try {
-            String sql = "INSERT INTO Comment (book_id, comment, stars, hide) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Comment (book_id, comment, stars, hide, inserted_ts) VALUES (?, ?, ?, ?, ?)";
 
             preparedStatement = connection.prepareStatement(sql);
 
@@ -91,6 +91,7 @@ public class CommentManager {
             preparedStatement.setString(2, comment.getComment());
             preparedStatement.setInt(3, comment.getStars());
             preparedStatement.setBoolean(4, comment.isHide());
+            preparedStatement.setDate(5, comment.getInsertedIs());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,13 +101,14 @@ public class CommentManager {
     public void updateComment(Comment comment) {
         PreparedStatement preparedStatement = null;
         try {
-            String sql = "UPDATE Comment SET book_id = ?, comment = ?, stars = ?, hide = ? WHERE comment_id = ?";
+            String sql = "UPDATE Comment SET book_id = ?, comment = ?, stars = ?, hide = ?, updated_ts = ? WHERE comment_id = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, comment.getBookId());
             preparedStatement.setString(2, comment.getComment());
             preparedStatement.setInt(3, comment.getStars());
             preparedStatement.setBoolean(4, comment.isHide());
-            preparedStatement.setInt(5, comment.getCommentId());
+            preparedStatement.setDate(5, comment.getUpdatedTs());
+            preparedStatement.setInt(6, comment.getCommentId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

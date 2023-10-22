@@ -1,6 +1,7 @@
 package be.isl.books.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Comment {
@@ -15,6 +16,8 @@ public class Comment {
     private String comment;
     private int stars;
     private boolean hide;
+    private java.sql.Date insertedTs;
+    private java.sql.Date updatedTs;
 
     // Getters and setters
     public int getCommentId() {
@@ -57,4 +60,19 @@ public class Comment {
         this.hide = hide;
     }
 
+    public java.sql.Date getInsertedIs() {
+        return insertedTs;
+    }
+
+    public void setInsertedIs(java.sql.Date date) {
+        this.insertedTs = date;
+    }
+
+    public java.sql.Date getUpdatedTs() {
+        return updatedTs;
+    }
+
+    public void setUpdatedTs(java.sql.Date date) {
+        this.updatedTs = date;
+    }
 }

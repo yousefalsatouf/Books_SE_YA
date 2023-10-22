@@ -8,6 +8,7 @@ import be.isl.books.ui.util.UIUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -82,10 +83,28 @@ public class BookUI {
         String title = scanner.nextLine();
         System.out.print("Enter Description: ");
         String description = scanner.nextLine();
+        System.out.print("Enter Number of Pages: ");
+        int nbPages = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter IsBn: ");
+        String isBn = scanner.nextLine();
+        System.out.print("Enter The Price: ");
+        double price = Double.parseDouble(scanner.nextLine());
+        System.out.print("Enter Publication Date (YYYY-MM-DD): ");
+        String publicationDate = scanner.nextLine();
 
         Book newBook = new Book();
         newBook.setTitle(title);
         newBook.setDescription(description);
+        newBook.setNbPages(nbPages);
+        newBook.setIsbn(isBn);
+        newBook.setPrice(price);
+        newBook.setPublicationDate(java.sql.Date.valueOf(publicationDate));
+
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        newBook.setInsertedIs(sqlDate);
+        newBook.setUpdatedTs(sqlDate);
 
         return newBook;
     }

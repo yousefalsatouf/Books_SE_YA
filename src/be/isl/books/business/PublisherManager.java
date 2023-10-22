@@ -77,9 +77,10 @@ public class PublisherManager {
         PreparedStatement preparedStatement = null;
 
         try {
-            String sql = "INSERT INTO Publisher (name) VALUES (?)";
+            String sql = "INSERT INTO Publisher (name, inserted_ts) VALUES (?, ?)";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, publisher.getName());
+            preparedStatement.setDate(2, publisher.getInsertedIs());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -91,11 +92,12 @@ public class PublisherManager {
         PreparedStatement preparedStatement = null;
 
         try {
-            String sql = "UPDATE Publisher SET name = ? WHERE publisher_id = ?";
+            String sql = "UPDATE Publisher SET name = ?, updated_ts = ? WHERE publisher_id = ?";
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, publisher.getName());
-            preparedStatement.setInt(2, publisher.getPublisherId());
+            preparedStatement.setDate(2, publisher.getUpdatedTs());
+            preparedStatement.setInt(3, publisher.getPublisherId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

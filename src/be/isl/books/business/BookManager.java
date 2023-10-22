@@ -95,8 +95,8 @@ public class BookManager {
 
     public void addBook(Book book) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "INSERT INTO Book (title, description, nb_pages, isbn, price, publication_date, publisher_id) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Book (title, description, nb_pages, isbn, price, publication_date, publisher_id, inserted_ts) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, book.getTitle());
                 preparedStatement.setString(2, book.getDescription());
@@ -105,7 +105,7 @@ public class BookManager {
                 preparedStatement.setDouble(5, book.getPrice());
                 preparedStatement.setDate(6, new java.sql.Date(book.getPublicationDate().getTime()));
                 preparedStatement.setInt(7, book.getPublisher().getPublisherId());
-
+                preparedStatement.setDate(8, book.getPublisher().getInsertedIs());
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -116,7 +116,7 @@ public class BookManager {
     public void updateBook(Book book) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String sql = "UPDATE Book " +
-                    "SET title = ?, description = ?, nb_pages = ?, isbn = ?, price = ?, publication_date = ?, publisher_id = ? " +
+                    "SET title = ?, description = ?, nb_pages = ?, isbn = ?, price = ?, publication_date = ?, publisher_id = ?, updated_ts = ? " +
                     "WHERE book_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, book.getTitle());
@@ -126,7 +126,8 @@ public class BookManager {
                 preparedStatement.setDouble(5, book.getPrice());
                 preparedStatement.setDate(6, new java.sql.Date(book.getPublicationDate().getTime()));
                 preparedStatement.setInt(7, book.getPublisher().getPublisherId());
-                preparedStatement.setInt(8, book.getBookId());
+                preparedStatement.setDate(8, book.getPublisher().getUpdatedTs());
+                preparedStatement.setInt(9, book.getBookId());
 
                 preparedStatement.executeUpdate();
             }

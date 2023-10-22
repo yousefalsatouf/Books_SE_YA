@@ -38,6 +38,8 @@ public class AuthorManager {
                 author.setLastname(resultSet.getString("lastname"));
                 author.setEmail(resultSet.getString("email"));
                 author.setDateOfBirth(resultSet.getDate("date_of_birth"));
+                author.setInsertedIs((resultSet.getDate("inserted_ts")));
+                author.setInsertedIs((resultSet.getDate("updated_ts")));
                 authors.add(author);
             }
 
@@ -63,6 +65,8 @@ public class AuthorManager {
                 author.setLastname(resultSet.getString("lastname"));
                 author.setEmail(resultSet.getString("email"));
                 author.setDateOfBirth(resultSet.getDate("date_of_birth"));
+                author.setInsertedIs((resultSet.getDate("inserted_ts")));
+                author.setInsertedIs((resultSet.getDate("updated_ts")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,14 +78,15 @@ public class AuthorManager {
         PreparedStatement preparedStatement = null;
 
         try {
-            String sql = "INSERT INTO Author (firstname, lastname, email, date_of_birth) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Author (firstname, lastname, email, date_of_birth, inserted_ts) VALUES (?, ?, ?, ?, ?)";
 
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, author.getFirstname());
             preparedStatement.setString(2, author.getLastname());
             preparedStatement.setString(3, author.getEmail());
-            preparedStatement.setDate(4, new java.sql.Date(author.getDateOfBirth().getTime()));
+            preparedStatement.setDate(4, author.getDateOfBirth());
+            preparedStatement.setDate(5, author.getInsertedIs());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,13 +97,16 @@ public class AuthorManager {
         PreparedStatement preparedStatement = null;
 
         try {
-            String sql = "UPDATE Author SET firstname = ?, lastname = ?, email = ?, date_of_birth = ? WHERE author_id = ?";
+            String sql = "UPDATE Author SET firstname = ?, lastname = ?, email = ?, date_of_birth = ?, updated_ts = ? WHERE author_id = ?";
+
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, author.getFirstname());
             preparedStatement.setString(2, author.getLastname());
             preparedStatement.setString(3, author.getEmail());
-            preparedStatement.setDate(4, new java.sql.Date(author.getDateOfBirth().getTime()));
-            preparedStatement.setInt(5, author.getAuthorId());
+            preparedStatement.setDate(4, author.getDateOfBirth());
+            preparedStatement.setDate(5, author.getUpdatedTs());
+            preparedStatement.setInt(6, author.getAuthorId());
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

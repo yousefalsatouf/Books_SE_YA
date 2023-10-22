@@ -13,9 +13,9 @@ public class Book {
     private int nb_pages;
     private String isbn;
     private double price;
-    @Temporal(TemporalType.DATE)
-    private Date publication_date;
-
+    private java.sql.Date publication_date;
+    private java.sql.Date insertedTs;
+    private java.sql.Date updatedTs;
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
@@ -73,7 +73,7 @@ public class Book {
         return publication_date;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPublicationDate(java.sql.Date publicationDate) {
         this.publication_date = publicationDate;
     }
 
@@ -83,6 +83,21 @@ public class Book {
 
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
+    }
+    public Date getInsertedIs() {
+        return insertedTs;
+    }
+
+    public void setInsertedIs(java.sql.Date date) {
+        this.insertedTs = date;
+    }
+
+    public Date getUpdatedTs() {
+        return updatedTs;
+    }
+
+    public void setUpdatedTs(java.sql.Date date) {
+        this.updatedTs = date;
     }
     @Override
     public String toString() {

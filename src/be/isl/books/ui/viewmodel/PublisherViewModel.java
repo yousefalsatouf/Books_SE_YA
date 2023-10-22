@@ -17,7 +17,8 @@ public class PublisherViewModel {
         return publisher.getName();
     }
 
-    // Implement getters for other publisher properties
+
+    // Here where the view will show on your terminal in a nice way for listing table data
 
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package be.isl.books.entity;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 public class BookAuthor {
@@ -15,4 +16,7 @@ public class BookAuthor {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
+
+    private java.sql.Date insertedTs;
+    private Date updatedTs;
 }

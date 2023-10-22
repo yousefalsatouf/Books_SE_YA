@@ -13,9 +13,9 @@ public class CommentViewModel {
         return comment.getCommentId();
     }
 
-    /*public int getBookId() {
+    public int getBookId() {
         return comment.getBookId();
-    }*/
+    }
 
     public String getComment() {
         return comment.getComment();
@@ -24,6 +24,8 @@ public class CommentViewModel {
     public int getStars() {
         return comment.getStars();
     }
+
+    // Here where the view will show on your terminal in a nice way for listing table data
 
     @Override
     public String toString() {

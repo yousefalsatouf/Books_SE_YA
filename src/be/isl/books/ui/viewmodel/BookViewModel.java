@@ -21,8 +21,8 @@ public class BookViewModel {
         return book.getDescription();
     }
 
-    // Implement getters for other book properties
 
+    // Here where the view will show on your terminal in a nice way for listing table data
     @Override
     public String toString() {
         return "Book ID: " + getBookId() + " | Title: " + getTitle() + " | Description: " + getDescription();

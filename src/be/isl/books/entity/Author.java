@@ -1,7 +1,7 @@
 package be.isl.books.entity;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity
 public class Author {
@@ -11,8 +11,9 @@ public class Author {
     private String firstname;
     private String lastname;
     private String email;
-    @Temporal(TemporalType.DATE)
-    private Date date_of_birth;
+    private java.sql.Date date_of_birth;
+    private java.sql.Date insertedTs;
+    private java.sql.Date updatedTs;
 
 
     public int getAuthorId() {
@@ -47,12 +48,28 @@ public class Author {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
+    public java.sql.Date getDateOfBirth() {
         return date_of_birth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(java.sql.Date dateOfBirth) {
         this.date_of_birth = dateOfBirth;
+    }
+
+    public java.sql.Date getInsertedIs() {
+        return insertedTs;
+    }
+
+    public void setInsertedIs(java.sql.Date  date) {
+        this.insertedTs =  date;
+    }
+
+    public java.sql.Date getUpdatedTs() {
+        return updatedTs;
+    }
+
+    public void setUpdatedTs(java.sql.Date  date) {
+        this.updatedTs = date;
     }
 
     @Override

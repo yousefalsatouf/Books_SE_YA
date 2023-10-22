@@ -8,6 +8,7 @@ import be.isl.books.ui.util.UIUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -78,11 +79,15 @@ public class PublisherUI {
     private static Publisher capturePublisherDetails(Scanner scanner) {
         System.out.print("Enter Publisher Name: ");
         String name = scanner.nextLine();
-        // Capture other publisher details here
 
         Publisher newPublisher = new Publisher();
         newPublisher.setName(name);
-        // Set other publisher details
+
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        newPublisher.setInsertedIs(sqlDate);
+        newPublisher.setUpdatedTs(sqlDate);
 
         return newPublisher;
     }

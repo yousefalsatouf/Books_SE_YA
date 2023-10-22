@@ -25,6 +25,7 @@ public class AuthorViewModel {
         return author.getDateOfBirth().toString();
     }
 
+    // Here where the view will show on your terminal in a nice way for listing table data
     @Override
     public String toString() {
         return "Author ID: " + getAuthorId() + " | Name: " + getFullName() + " | Email: " + getEmail() + " | Date of Birth: " + getDateOfBirth();

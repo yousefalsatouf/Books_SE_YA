@@ -5,6 +5,7 @@ import be.isl.books.entity.Comment;
 import be.isl.books.ui.viewmodel.CommentViewModel;
 import be.isl.books.ui.util.UIUtil;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -78,13 +79,20 @@ public class CommentUI {
         scanner.nextLine(); // Consume the newline character
         System.out.print("Enter Comment: ");
         String commentText = scanner.nextLine();
-        System.out.print("Enter Stars: ");
+        System.out.print("Enter Stars: EX 5");
         int stars = scanner.nextInt();
 
         Comment newComment = new Comment();
         newComment.setBookId(bookId);
         newComment.setComment(commentText);
         newComment.setStars(stars);
+        newComment.setHide(false);
+
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        newComment.setInsertedIs(sqlDate);
+        newComment.setUpdatedTs(sqlDate);
 
         return newComment;
     }
